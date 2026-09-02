@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopVerse · E-Commerce</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Google Font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f7f9fc;
+            color: #0f172a;
+            min-height: 100vh;
+        }
+
+        /* ---- layout ---- */
+        .app-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.2rem 1.5rem 3rem;
+        }
+
+        /* ---- header ---- */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0 1.2rem;
+            border-bottom: 1px solid #e9edf2;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+        }
+        .brand i {
+            color: #3b82f6;
+            font-size: 1.8rem;
+        }
+        .brand span {
+            color: #3b82f6;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cart-badge {
+            background: white;
+            padding: 0.4rem 1rem 0.4rem 0.8rem;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e9edf2;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .cart-badge:hover {
+            border-color: #3b82f6;
+        }
+        .cart-count {
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+        }
+
+        .user-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: white;
+            padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+            border-radius: 40px;
+            border: 1px solid #e9edf2;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        .role-badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.15rem 0.6rem;
+            border-radius: 30px;
+            background: #e2e8f0;
+            color: #475569;
+        }
+        .role-badge.admin {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            transition: 0.2s;
+        }
+        .btn-logout:hover {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.6rem 1.6rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: scale(0.98);
+        }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #e2e8f0;
+            color: #1e293b;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .btn-outline:hover {
+            background: #f1f5f9;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            border: none;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.8rem;
+        }
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-success {
+            background: #22c55e;
+            border: none;
+            color: white;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-success:hover {
+            background: #16a34a;
+        }
+
+        /* ---- auth card ---- */
+        .auth-card {
+            max-width: 420px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2.2rem 2rem;
+            border-radius: 28px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+        }
+        .auth-title {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+        }
+        .auth-sub {
+            color: #64748b;
+            margin-bottom: 1.8rem;
+        }
+        .auth-toggle {
+            color: #3b82f6;
+            font-weight: 600;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 0.95rem;
+        }
+        .auth-toggle:hover {
+            text-decoration: underline;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+            color: #334155;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            background: #f8fafc;
+            transition: 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+            background: white;
+        }
+
+        /* ---- product grid ---- */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.8rem 0 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .section-title {
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem 1rem 1.2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            border-color: #cbd5e1;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+        }
+        .product-img {
+            height: 120px;
+            background: #f1f5f9;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.8rem;
+        }
+        .product-name {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+        .product-price {
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 1.1rem;
+            margin: 0.2rem 0 0.6rem;
+        }
+        .product-actions {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+        .product-actions .btn-primary {
+            flex: 1;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
+        }
+        .product-actions .btn-outline {
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
+        }
+
+        /* ---- cart / orders ---- */
+        .cart-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid #edf2f7;
+            margin-bottom: 2rem;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .cart-item-qty button {
+            background: #f1f5f9;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .cart-item-qty button:hover {
+            background: #e2e8f0;
+        }
+        .cart-total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            text-align: right;
+        }
+
+        .order-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .order-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1rem 1.2rem;
+            border-left: 4px solid #3b82f6;
+        }
+        .order-card .order-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+        .order-card .order-items {
+            margin-top: 0.4rem;
+            font-size: 0.9rem;
+        }
+        .status-badge {
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .status-badge.shipped {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .status-badge.delivered {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .admin-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid #edf2f7;
+            margin: 1.5rem 0;
+        }
+        .admin-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: end;
+        }
+        .admin-form .form-group {
+            flex: 1 1 160px;
+            margin-bottom: 0;
+        }
+        .admin-form .form-group label {
+            font-size: 0.75rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .toast {
+            background: #0f172a;
+            color: white;
+            padding: 0.6rem 1.4rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            opacity: 0.95;
+        }
+
+        @media (max-width: 640px) {
+            .app-container {
+                padding: 0.8rem 1rem;
+            }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .header-actions {
+                justify-content: space-between;
+            }
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .admin-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" id="app">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="brand"><i class="fas fa-store"></i>Shop<span>Verse</span></div>
+            <div class="header-actions">
+                <div class="cart-badge" id="cartToggle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+                <div id="userWidget" class="user-chip hidden">
+                    <span class="user-avatar" id="userAvatar">U</span>
+                    <span id="userName">User</span>
+                    <span class="role-badge" id="roleBadge">User</span>
+                    <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <!-- AUTH CARD -->
+        <div id="authCard" class="auth-card">
+            <h2 class="auth-title" id="authTitle">Welcome back</h2>
+            <p class="auth-sub" id="authSub">Sign in to your account</p>
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="authEmail">Email</label>
+                    <input type="email" id="authEmail" placeholder="john@example.com" value="admin@shop.com">
+                </div>
+                <div class="form-group">
+                    <label for="authPassword">Password</label>
+                    <input type="password" id="authPassword" placeholder="••••••••" value="admin123">
+                </div>
+                <div class="form-group">
+                    <label for="authRoleSelect">Role (demo)</label>
+                    <select id="authRoleSelect">
+                        <option value="user">User</option>
+                        <option value="admin" selected>Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" id="authSubmitBtn">Sign In</button>
+            </form>
+            <p style="margin-top:1.2rem; font-size:0.9rem; color:#475569;">
+                <span id="authToggleText">Don't have an account?</span>
+                <button class="auth-toggle" id="authToggleBtn">Sign Up</button>
+            </p>
+        </div>
+
+        <!-- MAIN DASHBOARD -->
+        <div id="dashboard" class="hidden">
+
+            <!-- Admin Panel (only for admin) -->
+            <div id="adminPanel" class="admin-panel hidden">
+                <h4 style="margin-bottom:0.8rem;"><i class="fas fa-crown"></i> Admin — Product Management</h4>
+                <form class="admin-form" id="adminProductForm">
+                    <div class="form-group">
+                        <label>Product name</label>
+                        <input type="text" id="adminProductName" placeholder="Wireless earbuds" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Price ($)</label>
+                        <input type="number" id="adminProductPrice" placeholder="49.99" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Image icon (emoji)</label>
+                        <input type="text" id="adminProductIcon" placeholder="🎧" value="📦">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:auto;">+ Add Product</button>
+                </form>
+                <div style="margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+                    <button class="btn-outline" id="adminViewOrdersBtn"><i class="fas fa-truck"></i> View All Orders</button>
+                    <button class="btn-outline" id="adminClearOrdersBtn"><i class="fas fa-trash"></i> Clear Orders</button>
+                </div>
+            </div>
+
+            <!-- PRODUCT CATALOG -->
+            <div class="section-header">
+                <span class="section-title"><i class="fas fa-box"></i> Products</span>
+                <span style="font-size:0.9rem; color:#64748b;" id="productCount">0 items</span>
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+
+            <!-- CART PANEL (toggle) -->
+            <div id="cartPanel" class="cart-panel hidden">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
+                    <h4><i class="fas fa-shopping-cart"></i> Your Cart</h4>
+                    <button class="btn-outline" id="closeCartBtn"><i class="fas fa-times"></i></button>
+                </div>
+                <div id="cartItems"></div>
+                <div class="cart-total" id="cartTotal">Total: $0.00</div>
+                <button class="btn-success" id="checkoutBtn" style="width:100%; margin-top:0.8rem;">
+                    <i class="fas fa-check"></i> Checkout
+                </button>
+            </div>
+
+            <!-- ORDERS -->
+            <div class="section-header" style="margin-top:2rem;">
+                <span class="section-title"><i class="fas fa-truck"></i> Your Orders</span>
+            </div>
+            <div id="orderList" class="order-list">
+                <div style="color:#94a3b8; text-align:center; padding:2rem 0;">No orders yet.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ---- DATA STORE (simulates database) ----
+            let products = [
+                { id: 'p1', name: 'Wireless Earbuds', price: 49.99, icon: '🎧' },
+                { id: 'p2', name: 'Smart Watch', price: 89.99, icon: '⌚' },
+                { id: 'p3', name: 'USB-C Hub', price: 29.99, icon: '🔌' },
+                { id: 'p4', name: 'Mechanical Keyboard', price: 79.99, icon: '⌨️' },
+                { id: 'p5', name: 'Portable SSD', price: 119.99, icon: '💾' },
+                { id: 'p6', name: 'LED Monitor', price: 199.99, icon: '🖥️' },
+            ];
+
+            let users = [
+                { id: 'u1', email: 'admin@shop.com', password: 'admin123', name: 'Admin', role: 'admin' },
+                { id: 'u2', email: 'user@shop.com', password: 'user123', name: 'John', role: 'user' },
+            ];
+
+            let currentUser = null; // { id, email, name, role }
+            let cart = []; // { productId, quantity }
+            let orders = []; // { id, userId, items: [{productId, name, price, qty}], total, status, createdAt }
+
+            // ---- DOM refs ----
+            const authCard = document.getElementById('authCard');
+            const dashboard = document.getElementById('dashboard');
+            const userWidget = document.getElementById('userWidget');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
+            const roleBadge = document.getElementById('roleBadge');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            const authTitle = document.getElementById('authTitle');
+            const authSub = document.getElementById('authSub');
+            const authSubmitBtn = document.getElementById('authSubmitBtn');
+            const authToggleBtn = document.getElementById('authToggleBtn');
+            const authToggleText = document.getElementById('authToggleText');
+            const authForm = document.getElementById('authForm');
+            const authEmail = document.getElementById('authEmail');
+            const authPassword = document.getElementById('authPassword');
+            const authRoleSelect = document.getElementById('authRoleSelect');
+
+            const productGrid = document.getElementById('productGrid');
+            const productCount = document.getElementById('productCount');
+            const cartCount = document.getElementById('cartCount');
+            const cartPanel = document.getElementById('cartPanel');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const closeCartBtn = document.getElementById('closeCartBtn');
+            const cartToggle = document.getElementById('cartToggle');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const orderList = document.getElementById('orderList');
+
+            const adminPanel = document.getElementById('adminPanel');
+            const adminProductForm = document.getElementById('adminProductForm');
+            const adminProductName = document.getElementById('adminProductName');
+            const adminProductPrice = document.getElementById('adminProductPrice');
+            const adminProductIcon = document.getElementById('adminProductIcon');
+            const adminViewOrdersBtn = document.getElementById('adminViewOrdersBtn');
+            const adminClearOrdersBtn = document.getElementById('adminClearOrdersBtn');
+
+            let isLoginMode = true;
+
+            // ---- helpers ----
+            function showToast(msg) {
+                let t = document.querySelector('.toast');
+                if (!t) { t = document.createElement('div');
+                    t.className = 'toast';
+                    document.body.appendChild(t); }
+                t.textContent = msg;
+                t.style.opacity = '1';
+                clearTimeout(t._hide);
+                t._hide = setTimeout(() => { t.style.opacity = '0'; }, 2200);
+            }
+
+            function generateId() { return '_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6); }
+
+            // ---- auth ----
+            function setAuthMode(login) {
+                isLoginMode = login;
+                if (login) {
+                    authTitle.textContent = 'Welcome back';
+                    authSub.textContent = 'Sign in to your account';
+                    authSubmitBtn.textContent = 'Sign In';
+                    authToggleText.textContent = "Don't have an account?";
+                    authToggleBtn.textContent = 'Sign Up';
+                } else {
+                    authTitle.textContent = 'Create account';
+                    authSub.textContent = 'Start shopping today';
+                    authSubmitBtn.textContent = 'Sign Up';
+                    authToggleText.textContent = 'Already have an account?';
+                    authToggleBtn.textContent = 'Sign In';
+                }
+            }
+
+            function handleAuth(e) {
+                e.preventDefault();
+                const email = authEmail.value.trim();
+                const password = authPassword.value.trim();
+                const role = authRoleSelect.value;
+                if (!email || !password) return showToast('Please fill in all fields');
+
+                if (isLoginMode) {
+                    const found = users.find(u => u.email === email && u.password === password);
+                    if (!found) return showToast('Invalid credentials');
+                    currentUser = { ...found };
+                    showToast(`Welcome, ${currentUser.name}!`);
+                    renderApp();
+                } else {
+                    // signup
+                    if (users.find(u => u.email === email)) return showToast('Email already registered');
+                    const newUser = {
+                        id: 'u' + Date.now(),
+                        email,
+                        password,
+                        name: email.split('@')[0] || 'User',
+                        role: role || 'user'
+                    };
+                    users.push(newUser);
+                    currentUser = { ...newUser };
+                    showToast(`Account created! Hello ${currentUser.name}`);
+                    renderApp();
+                }
+            }
+
+            function logout() {
+                currentUser = null;
+                cart = [];
+                orders = [];
+                renderApp();
+                showToast('Logged out');
+            }
+
+            // ---- products ----
+            function renderProducts() {
+                if (!productGrid) return;
+                if (!products.length) {
+                    productGrid.innerHTML =
+                        `<div style="grid-column:1/-1; text-align:center; color:#94a3b8; padding:2rem;">No products available</div>`;
+                    productCount.textContent = '0 items';
+                    return;
+                }
+                let html = '';
+                products.forEach(p => {
+                    const inCart = cart.find(c => c.productId === p.id);
+                    const qty = inCart ? inCart.quantity : 0;
+                    html += `
+                        <div class="product-card" data-id="${p.id}">
+                            <div class="product-img">${p.icon || '📦'}</div>
+                            <div class="product-name">${escapeHtml(p.name)}</div>
+                            <div class="product-price">$${p.price.toFixed(2)}</div>
+                            <div class="product-actions">
+                                <button class="btn-primary add-to-cart" data-id="${p.id}"><i class="fas fa-plus"></i> Add</button>
+                                ${qty > 0 ? `<button class="btn-outline remove-from-cart" data-id="${p.id}"><i class="fas fa-minus"></i></button>` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                productGrid.innerHTML = html;
+                productCount.textContent = products.length + ' items';
+            }
+
+            function escapeHtml(text) {
+                const d = document.createElement('div');
+                d.textContent = text;
+                return d.innerHTML;
+            }
+
+            // ---- cart ----
+            function updateCartUI() {
+                const total = cart.reduce((sum, item) => {
+                    const prod = products.find(p => p.id === item.productId);
+                    return sum + (prod ? prod.price * item.quantity : 0);
+                }, 0);
+                const count = cart.reduce((s, i) => s + i.quantity, 0);
+                cartCount.textContent = count;
+
+                if (!cartItems) return;
+                if (!cart.length) {
+                    cartItems.innerHTML = '<div style="color:#94a3b8; padding:1rem 0;">Your cart is empty.</div>';
+                    cartTotal.textContent = 'Total: $0.00';
+                    return;
+                }
+                let html = '';
+                cart.forEach(item => {
+                    const prod = products.find(p => p.id === item.productId);
+                    if (!prod) return;
+                    html += `
+                        <div class="cart-item">
+                            <div class="cart-item-info">
+                                <span>${prod.icon || '📦'} ${escapeHtml(prod.name)}</span>
+                                <span>$${prod.price.toFixed(2)}</span>
+                            </div>
+                            <div class="cart-item-qty">
+                                <button class="cart-qty-dec" data-id="${prod.id}">−</button>
+                                <span>${item.quantity}</span>
+                                <button class="cart-qty-inc" data-id="${prod.id}">+</button>
+                                <button class="btn-danger cart-remove" data-id="${prod.id}" style="padding:0.1rem 0.6rem; font-size:0.7rem;">✕</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                cartItems.innerHTML = html;
+                cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+            }
+
+            function addToCart(productId) {
+                const existing = cart.find(c => c.productId === productId);
+                if (existing) existing.quantity += 1;
+                else cart.push({ productId, quantity: 1 });
+                updateCartUI();
+                renderProducts();
+                showToast('Added to cart');
+            }
+
+            function removeFromCart(productId) {
+                const existing = cart.find(c => c.productId === productId);
+                if (!existing) return;
+                if (existing.quantity > 1) existing.quantity -= 1;
+                else cart = cart.filter(c => c.productId !== productId);
+                updateCartUI();
+                renderProducts();
+            }
+
+            function clearCart() { cart = [];
+                updateCartUI();
+                renderProducts(); }
+
+            // ---- orders ----
+            function placeOrder() {
+                if (!currentUser) return showToast('Please login first');
+                if (!cart.length) return showToast('Cart is empty');
+                const items = cart.map(c => {
+                    const prod = products.find(p => p.id === c.productId);
+                    return { productId: c.productId, name: prod ? prod.name : 'Unknown', price: prod ? prod.price : 0,
+                        quantity: c.quantity };
+                });
+                const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+                const order = {
+                    id: 'ord_' + Date.now(),
+                    userId: currentUser.id,
+                    items,
+                    total,
+                    status: 'pending',
+                    createdAt: new Date().toISOString()
+                };
+                orders.push(order);
+                cart = [];
+                updateCartUI();
+                renderProducts();
+                renderOrders();
+                showToast(`Order placed! Total: $${total.toFixed(2)}`);
+                cartPanel.classList.add('hidden');
+            }
+
+            function renderOrders() {
+                if (!orderList) return;
+                const userOrders = orders.filter(o => o.userId === currentUser?.id);
+                // admin sees all
+                const displayOrders = (currentUser?.role === 'admin') ? orders : userOrders;
+                if (!displayOrders.length) {
+                    orderList.innerHTML = '<div style="color:#94a3b8; text-align:center; padding:2rem 0;">No orders yet.</div>';
+                    return;
+                }
+                let html = '';
+                displayOrders.forEach(o => {
+                    const statusClass = o.status === 'shipped' ? 'shipped' : o.status === 'delivered' ? 'delivered' : '';
+                    const itemsStr = o.items.map(i => `${i.name} ×${i.quantity}`).join(', ');
+                    html += `
+                        <div class="order-card">
+                            <div class="order-meta">
+                                <span><strong>Order #${o.id.slice(-6)}</strong></span>
+                                <span>${new Date(o.createdAt).toLocaleDateString()}</span>
+                                <span class="status-badge ${statusClass}">${o.status}</span>
+                            </div>
+                            <div class="order-items">${itemsStr}</div>
+                            <div style="font-weight:600; margin-top:0.3rem;">Total: $${o.total.toFixed(2)}</div>
+                            ${currentUser?.role === 'admin' ? `<button class="btn-outline update-order-status" data-id="${o.id}" style="margin-top:0.4rem; font-size:0.75rem;">Mark Shipped</button>` : ''}
+                        </div>
+                    `;
+                });
+                orderList.innerHTML = html;
+            }
+
+            // ---- admin ----
+            function addProduct(name, price, icon) {
+                const trimmed = name.trim();
+                if (!trimmed || isNaN(price) || price <= 0) return showToast('Valid name and price required');
+                products.push({ id: 'p' + Date.now(), name: trimmed, price: parseFloat(price), icon: icon || '📦' });
+                renderProducts();
+                showToast('Product added');
+            }
+
+            function deleteProduct(id) {
+                products = products.filter(p => p.id !== id);
+                renderProducts();
+                showToast('Product removed');
+            }
+
+            // ---- render app ----
+            function renderApp() {
+                if (currentUser) {
+                    authCard.classList.add('hidden');
+                    dashboard.classList.remove('hidden');
+                    userWidget.classList.remove('hidden');
+                    userName.textContent = currentUser.name;
+                    userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+                    roleBadge.textContent = currentUser.role;
+                    roleBadge.className = 'role-badge' + (currentUser.role === 'admin' ? ' admin' : '');
+
+                    // admin panel
+                    if (currentUser.role === 'admin') adminPanel.classList.remove('hidden');
+                    else adminPanel.classList.add('hidden');
+
+                    renderProducts();
+                    updateCartUI();
+                    renderOrders();
+                } else {
+                    authCard.classList.remove('hidden');
+                    dashboard.classList.add('hidden');
+                    userWidget.classList.add('hidden');
+                    // reset
+                }
+            }
+
+            // ---- event delegation ----
+            function setupEvents() {
+                // auth toggle
+                authToggleBtn.addEventListener('click', () => setAuthMode(!isLoginMode));
+                authForm.addEventListener('submit', handleAuth);
+                logoutBtn.addEventListener('click', logout);
+
+                // product grid events (add, remove, delete for admin)
+                productGrid.addEventListener('click', (e) => {
+                    const target = e.target.closest('button');
+                    if (!target) return;
+                    if (target.classList.contains('add-to-cart')) {
+                        addToCart(target.dataset.id);
+                    } else if (target.classList.contains('remove-from-cart')) {
+                        removeFromCart(target.dataset.id);
+                    } else if (target.classList.contains('delete-product')) {
+                        if (confirm('Delete this product?')) deleteProduct(target.dataset.id);
+                    }
+                });
+
+                // cart panel toggle
+                cartToggle.addEventListener('click', () => {
+                    cartPanel.classList.toggle('hidden');
+                });
+                closeCartBtn.addEventListener('click', () => cartPanel.classList.add('hidden'));
+
+                // cart quantity buttons
+                cartItems.addEventListener('click', (e) => {
+                    const target = e.target.closest('button');
+                    if (!target) return;
+                    const id = target.dataset.id;
+                    if (target.classList.contains('cart-qty-inc')) addToCart(id);
+                    else if (target.classList.contains('cart-qty-dec')) removeFromCart(id);
+                    else if (target.classList.contains('cart-remove')) {
+                        cart = cart.filter(c => c.productId !== id);
+                        updateCartUI();
+                        renderProducts();
+                        showToast('Removed from cart');
+                    }
+                });
+
+                // checkout
+                checkoutBtn.addEventListener('click', placeOrder);
+
+                // admin product form
+                adminProductForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = adminProductName.value.trim();
+                    const price = parseFloat(adminProductPrice.value);
+                    const icon = adminProductIcon.value.trim() || '📦';
+                    if (!name || isNaN(price) || price <= 0) return showToast('Valid name & price');
+                    addProduct(name, price, icon);
+                    adminProductName.value = '';
+                    adminProductPrice.value = '';
+                    adminProductIcon.value = '📦';
+                });
+
+                // admin view orders / clear orders
+                adminViewOrdersBtn.addEventListener('click', () => {
+                    renderOrders();
+                    showToast(`Showing ${orders.length} orders`);
+                });
+                adminClearOrdersBtn.addEventListener('click', () => {
+                    if (confirm('Clear all orders?')) {
+                        orders = [];
+                        renderOrders();
+                        showToast('Orders cleared');
+                    }
+                });
+
+                // admin: update order status (delegation)
+                orderList.addEventListener('click', (e) => {
+                    const target = e.target.closest('.update-order-status');
+                    if (!target) return;
+                    const id = target.dataset.id;
+                    const order = orders.find(o => o.id === id);
+                    if (order) {
+                        if (order.status === 'pending') order.status = 'shipped';
+                        else if (order.status === 'shipped') order.status = 'delivered';
+                        else order.status = 'pending';
+                        renderOrders();
+                        showToast(`Order status updated to ${order.status}`);
+                    }
+                });
+            }
+
+            // ---- init ----
+            setAuthMode(true);
+            renderApp();
+            setupEvents();
+
+            // ---- demo: prefill admin ----
+            // already set in html
+
+        })();
+    </script>
+</body>
+</html>
